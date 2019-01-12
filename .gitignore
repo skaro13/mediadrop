@@ -18,3 +18,5 @@ mediadrop/public/scripts/goog
 wiki
 build
 .metadata
+.idea/
+.eggs/
