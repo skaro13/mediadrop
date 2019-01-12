@@ -21,6 +21,7 @@ from sqlalchemy.exc import OperationalError
 from webob.exc import HTTPNotAcceptable, HTTPNotFound
 
 from mediadrop import USER_AGENT
+from mediadrop.lib.auth import has_permission
 from mediadrop.forms.comments import PostCommentSchema
 from mediadrop.lib import helpers
 from mediadrop.lib.base import BaseController
@@ -40,6 +41,8 @@ log = logging.getLogger(__name__)
 comment_schema = PostCommentSchema()
 
 class MediaController(BaseController):
+    allow_only = has_permission('view')
+
     """
     Media actions -- for both regular and podcast media
     """
@@ -139,7 +142,7 @@ class MediaController(BaseController):
             if not featured:
                 featured = viewable_media(popular).first()
 
-        nr_latest_items = 8
+        nr_latest_items = 5
         if is_featured_item_enabled:
             nr_popular_items = max(nr_latest_items - 3, 0)
         else:

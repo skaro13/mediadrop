@@ -19,6 +19,7 @@ from mediadrop.lib.storage import add_new_media_file
 from mediadrop.lib.thumbnails import create_default_thumbs_for, has_thumbs
 from mediadrop.model import Author, DBSession, get_available_slug, Media
 from mediadrop.plugin import events
+from mediadrop.lib.auth import has_permission
 
 import logging
 log = logging.getLogger(__name__)
@@ -29,6 +30,8 @@ upload_form = UploadForm(
 )
 
 class UploadController(BaseController):
+    allow_only = has_permission('view')
+
     """
     Media Upload Controller
     """

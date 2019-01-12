@@ -17,11 +17,14 @@ from mediadrop.lib.helpers import content_type_for_response, url_for, redirect
 from mediadrop.model import Media, Podcast, fetch_row
 from mediadrop.plugin import events
 from mediadrop.validation import LimitFeedItemsValidator
+from mediadrop.lib.auth import has_permission
 
 import logging
 log = logging.getLogger(__name__)
 
 class PodcastsController(BaseController):
+    allow_only = has_permission('view')
+
     """
     Podcast Series Controller
 

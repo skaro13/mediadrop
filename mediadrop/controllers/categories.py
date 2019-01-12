@@ -17,11 +17,14 @@ from mediadrop.lib.i18n import _
 from mediadrop.model import Category, Media, fetch_row
 from mediadrop.plugin import events
 from mediadrop.validation import LimitFeedItemsValidator
+from mediadrop.lib.auth import has_permission
 
 import logging
 log = logging.getLogger(__name__)
 
 class CategoriesController(BaseController):
+    allow_only = has_permission('view')
+
     """
     Categories Controller
 

@@ -25,6 +25,7 @@ from mediadrop.lib.helpers import (content_type_for_response,
     get_featured_category, url_for, viewable_media)
 from mediadrop.model import Media
 from mediadrop.validation import LimitFeedItemsValidator
+from mediadrop.lib.auth import has_permission
 
 log = logging.getLogger(__name__)
 
@@ -34,6 +35,8 @@ crossdomain_app = None
 
 
 class SitemapsController(BaseController):
+    allow_only = has_permission('view')
+
     """
     Sitemap generation
     """
